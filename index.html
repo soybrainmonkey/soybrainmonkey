@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SOYBRAINMONKEY — Edición de vídeo y marca personal</title>
+<meta name="description" content="Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje. Contenido personalizado, adaptado a tu punto de partida.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SOYBRAINMONKEY — Elite Creative Studio">
+<meta property="og:description" content="Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://www.soybrainmonkey.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SOYBRAINMONKEY — Elite Creative Studio">
+<meta name="twitter:description" content="Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje.">
+<meta name="twitter:image" content="og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Alex+Brush&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -77,7 +89,7 @@
   /* HERO */
   .hero{
     position:relative;
-    padding:64px 0 60px;
+    padding:36px 0 60px;
     overflow:hidden;
   }
   .glow{
@@ -118,22 +130,31 @@
   @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
 
   .pill{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:16px 26px;border-radius:100px;
-    font-weight:700;font-size:14px;
+    display:inline-flex;align-items:center;gap:14px;
+    padding:17px 28px;border-radius:14px;
+    font-family:'Poppins';font-weight:700;font-size:14px;
     text-transform:uppercase;letter-spacing:0.02em;
-    cursor:pointer;border:1px solid transparent;
+    cursor:pointer;border:1px solid;
     text-decoration:none;
-    transition:transform .15s ease, box-shadow .2s ease;
+    position:relative;overflow:hidden;isolation:isolate;
+    transition:color .3s ease, transform .15s ease, border-color .3s ease;
   }
-  .pill:hover{transform:translateY(-2px);}
-  .pill.primary{background:var(--coral);color:var(--ink);box-shadow:0 10px 26px -8px rgba(240,137,126,0.55);}
-  .pill.primary:hover{box-shadow:0 14px 30px -6px rgba(240,137,126,0.6);}
-  .pill.secondary{background:rgba(244,241,234,0.04);color:var(--paper);border-color:var(--line);box-shadow:inset 0 0 0 1px rgba(244,241,234,0.02);}
-  .pill.secondary:hover{border-color:var(--paper-dim);}
-  .pill.tertiary{background:var(--tan);color:var(--ink);box-shadow:0 10px 26px -8px rgba(216,185,140,0.55);}
-  .pill.tertiary:hover{box-shadow:0 14px 30px -6px rgba(216,185,140,0.6);}
-  .pill .plus{font-size:18px;line-height:1;transition:transform .25s ease;}
+  .pill span:not(.plus){position:relative;z-index:1;}
+  .pill::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:var(--ink);
+    transform:scaleX(0);transform-origin:right;
+    transition:transform .35s cubic-bezier(.22,.61,.36,1);
+  }
+  .pill:hover::before{transform:scaleX(1);}
+  .pill:hover{transform:translateY(-1px);}
+  .pill.primary{border-color:var(--coral);color:var(--ink);background:var(--coral);}
+  .pill.primary:hover{color:var(--coral);}
+  .pill.secondary{border-color:var(--line);color:var(--paper);background:rgba(244,241,234,0.06);}
+  .pill.secondary:hover{color:var(--paper);border-color:var(--paper-dim);}
+  .pill.tertiary{border-color:var(--tan);color:var(--ink);background:var(--tan);}
+  .pill.tertiary:hover{color:var(--tan);}
+  .pill .plus{position:relative;z-index:1;font-family:'Poppins';font-size:18px;line-height:1;transition:transform .25s ease;}
   .pill.open .plus{transform:rotate(45deg);}
 
   /* MARQUEE */
@@ -146,7 +167,7 @@
   }
   .marquee-track{
     display:flex; white-space:nowrap;
-    animation:scroll-left 22s linear infinite;
+    animation:scroll-left 80s linear infinite;
     transform:skewY(1.6deg);
   }
   .marquee-track span{
@@ -333,16 +354,32 @@
 
   /* FOOTER */
   footer{
-    border-top:1px solid var(--line);padding:44px 0;
+    border-top:1px solid var(--line);padding:56px 0 40px;
     background:linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
     box-shadow:0 -20px 40px -30px rgba(0,0,0,0.6) inset;
+    text-align:center;
   }
-  footer .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;}
-  .foot-script{font-family:'Alex Brush'; font-size:28px; color:var(--tan);}
-  .socials{display:flex;gap:22px;font-size:13px;color:var(--paper-dim);text-transform:uppercase;letter-spacing:0.03em;}
+  footer .wrap{display:flex;flex-direction:column;align-items:center;gap:28px;}
+  .foot-brand{display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .foot-logo{font-family:'Anton';font-size:clamp(26px,4vw,36px);letter-spacing:0.02em;text-transform:uppercase;}
+  .foot-logo .b1{color:var(--paper);}
+  .foot-logo .b2{color:var(--coral);}
+  .foot-logo .b3{color:var(--lime);}
+  .foot-tagline{font-family:'Poppins';font-weight:500;font-size:12px;color:var(--paper-dim);text-transform:uppercase;letter-spacing:0.28em;}
+  .foot-bottom{
+    width:100%;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;
+    align-items:center;
+    text-align:left;padding-top:24px;border-top:1px solid var(--line);
+  }
+  .foot-script{font-family:'Alex Brush'; font-size:26px; color:var(--tan);justify-self:start;}
+  .socials{justify-self:center;display:flex;flex-wrap:wrap;gap:22px;font-size:13px;color:var(--paper-dim);text-transform:uppercase;letter-spacing:0.03em;}
   .socials a{text-decoration:none;}
   .socials a:hover{color:var(--paper);}
-  .copy{font-size:12px;color:#6b6960;}
+  .copy{justify-self:end;font-size:12px;color:#6b6960;}
+  @media (max-width:640px){
+    .foot-bottom{grid-template-columns:1fr;justify-items:center;text-align:center;gap:16px;}
+    .foot-script, .socials, .copy{justify-self:center;}
+  }
 
   /* FLOATING WHATSAPP */
   .wa-float{
@@ -360,7 +397,7 @@
   }
 
   @media (max-width:640px){
-    .hero{padding:44px 0 30px;}
+    .hero{padding:20px 0 30px;}
     .service-item{grid-template-columns:1fr;}
     .service-item .desc{grid-column:1;}
     .services{padding:22px 0 16px;}
@@ -372,9 +409,15 @@
     .marquee-band{margin:14px 0 16px;}
     .pricing, .meta-cta{padding:44px 0 60px;}
   }
+
+  /* Cursor especial solo sobre los 3 botones del hero (círculo lima) */
+  .hero-ctas .pill{
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="17" fill="none" stroke="%23c7e62e" stroke-width="2"/></svg>') 20 20, pointer;
+  }
 </style>
 </head>
 <body id="top">
+
 
 <nav>
   <div class="wrap">
@@ -608,13 +651,19 @@
 
 <footer>
   <div class="wrap">
-    <div class="foot-script script">gracias por pasarte</div>
-    <div class="socials">
-      <a href="#" target="_blank" rel="noopener">Instagram</a>
-      <a href="#" target="_blank" rel="noopener">TikTok</a>
-      <a href="#" target="_blank" rel="noopener">YouTube</a>
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="b1">SOY</span><span class="b2">BRAIN</span><span class="b3">MONKEY</span></div>
+      <div class="foot-tagline">Elite Creative Studio</div>
     </div>
-    <div class="copy">© 2026 SOYBRAINMONKEY</div>
+    <div class="foot-bottom">
+      <span class="foot-script script">gracias por pasarte</span>
+      <div class="socials">
+        <a href="https://www.instagram.com/soybrainmonkey/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@soybrainmonkey" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@SoyBrainMonkey" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <span class="copy">© 2026 SOYBRAINMONKEY</span>
+    </div>
   </div>
 </footer>
 
@@ -641,10 +690,10 @@
     glow.style.setProperty('--my', y + '%');
   });
 
-  // Marquee content
-  const words = ["Edición de vídeo", "Marca personal", "Guiones para reels", "Estructura y grabación"];
+  // Marquee content — repetido varias veces para que se vea infinito, nunca vacío
+  const words = ["Edición de vídeo", "Marca personal", "Guiones para reels", "Estructura y grabación", "Creación de logos"];
   const marqueeTrack = document.getElementById('marquee-track');
-  for(let i=0;i<2;i++){
+  for(let i=0;i<6;i++){
     words.forEach(w=>{
       const s = document.createElement('span');
       s.textContent = w;
