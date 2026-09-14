@@ -320,13 +320,16 @@
     transition:border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
   .logo-chip:hover{border-color:var(--lime); color:var(--paper); transform:translateY(-3px); box-shadow:0 18px 36px -16px rgba(199,230,46,0.25);}
+  .logo-chip img{max-width:75%;max-height:38px;object-fit:contain;filter:grayscale(1) brightness(1.6);opacity:.8;transition:filter .2s ease, opacity .2s ease;}
+  .logo-chip:hover img{filter:none;opacity:1;}
 
   /* TARIFAS */
-  .pricing{padding:70px 0 90px;text-align:center;}
-  .pricing .eyebrow-tarifas{font-size:clamp(24px,3vw,32px);color:var(--tan);display:block;margin-bottom:-6px;}
-  .pricing h2{font-size:clamp(32px,5vw,54px);margin-bottom:18px;}
-  .pricing p{max-width:480px;margin:0 auto 30px;color:var(--paper-dim);font-size:16px;}
-  .pricing .pill{margin:0 auto;}
+  .pricing, .meta-cta{padding:70px 0 90px;text-align:center;}
+  .meta-cta{border-top:1px solid var(--line);padding-top:60px;}
+  .pricing .eyebrow-tarifas, .meta-cta .eyebrow-tarifas{font-size:clamp(24px,3vw,32px);color:var(--tan);display:block;margin-bottom:-6px;}
+  .pricing h2, .meta-cta h2{font-size:clamp(32px,5vw,54px);margin-bottom:18px;}
+  .pricing p, .meta-cta p{max-width:480px;margin:0 auto 30px;color:var(--paper-dim);font-size:16px;}
+  .pricing .pill, .meta-cta .pill{margin:0 auto;}
 
   /* FOOTER */
   footer{
@@ -367,7 +370,7 @@
     .work .sub{margin-bottom:24px;}
     .trusted{padding:30px 0 44px;}
     .marquee-band{margin:14px 0 16px;}
-    .pricing{padding:44px 0 60px;}
+    .pricing, .meta-cta{padding:44px 0 60px;}
   }
 </style>
 </head>
@@ -594,6 +597,15 @@
   </div>
 </section>
 
+<section class="meta-cta">
+  <div class="wrap">
+    <span class="script eyebrow-tarifas">¿te gusta esta web?</span>
+    <h2>¿Quieres un portafolio como este?</h2>
+    <p>También diseño y desarrollo páginas como la que estás viendo ahora mismo.</p>
+    <a class="pill tertiary" id="meta-cta-wa" href="#" target="_blank" rel="noopener">Lo creamos</a>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-script script">gracias por pasarte</div>
@@ -616,6 +628,7 @@
   document.getElementById('nav-wa').href = `https://wa.me/${WA_NUMBER}`;
   document.getElementById('float-wa').href = `https://wa.me/${WA_NUMBER}`;
   document.getElementById('pricing-wa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola! Quiero consultarte sobre tarifas para un vídeo.')}`;
+  document.getElementById('meta-cta-wa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola! Me gusta tu web y quiero un portafolio como este.')}`;
 
   // Hero glow follows the cursor
   const hero = document.getElementById('hero');
@@ -746,13 +759,26 @@
     else { setTimeout(processIgEmbeds, 300); }
   })();
 
-  // Clientes y marcas — placeholders, sustituir por logos reales
-  const brands = ["Marca 1", "Marca 2", "Marca 3", "Marca 4", "Marca 5", "Marca 6"];
+  // Clientes y marcas — reemplaza cada entrada por tu logo real:
+  //   { name: 'Nombre de la marca', img: 'logos/marca1.png' }
+  // Si no pones "img", se muestra el nombre en texto (como ahora).
+  const brands = [
+    { name: "Marca 1" },
+    { name: "Marca 2" },
+    { name: "Marca 3" },
+    { name: "Marca 4" },
+    { name: "Marca 5" },
+    { name: "Marca 6" },
+  ];
   const trustedGrid = document.getElementById('trusted-grid');
   brands.forEach(b=>{
     const d = document.createElement('div');
     d.className = 'logo-chip';
-    d.textContent = b;
+    if(b.img){
+      d.innerHTML = `<img src="${b.img}" alt="${b.name}">`;
+    } else {
+      d.textContent = b.name;
+    }
     trustedGrid.appendChild(d);
   });
 
