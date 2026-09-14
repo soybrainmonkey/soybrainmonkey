@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOYBRAINMONKEY — Edición de vídeo y marca personal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Alex+Brush&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://www.instagram.com/embed.js"></script>
+<style>
+  :root{
+    --ink:#0b0b0a;
+    --ink-2:#151512;
+    --paper:#f4f1ea;
+    --paper-dim:#a9a69c;
+    --lime:#c7e62e;
+    --coral:#f0897e;
+    --tan:#d8b98c;
+    --line: rgba(244,241,234,0.14);
+    --mx:50%; --my:40%;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(199,230,46,0.06), transparent 60%),
+      radial-gradient(1000px 700px at 110% 30%, rgba(240,137,126,0.05), transparent 55%),
+      var(--ink);
+    color:var(--paper);
+    font-family:'Poppins',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    line-height:0.92;
+    margin:0;
+    letter-spacing:0.002em;
+    text-transform:uppercase;
+  }
+  .script{
+    font-family:'Alex Brush', cursive;
+    text-transform:none;
+    letter-spacing:0;
+    display:inline-block;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,11,10,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 14px 30px -20px rgba(0,0,0,0.9);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .logo{font-family:'Anton';font-size:19px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;cursor:pointer;}
+  .logo .b1{color:var(--paper);}
+  .logo .b2{color:var(--coral);}
+  .logo .b3{color:var(--lime);}
+  .nav-cta{
+    display:flex;align-items:center;gap:8px;
+    background:var(--lime);color:var(--ink);
+    padding:11px 22px;border-radius:100px;
+    font-weight:700;font-size:13px;text-decoration:none;
+    text-transform:uppercase;letter-spacing:0.03em;
+    transition:transform .15s ease;
+  }
+  .nav-cta:hover{transform:translateY(-1px) scale(1.03);}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:64px 0 60px;
+    overflow:hidden;
+  }
+  .glow{
+    position:absolute; inset:-20% -10%;
+    pointer-events:none; z-index:0;
+    background:
+      radial-gradient(480px 480px at var(--mx) var(--my), rgba(199,230,46,0.16), transparent 60%),
+      radial-gradient(420px 420px at calc(100% - var(--mx)) calc(100% - var(--my)), rgba(240,137,126,0.14), transparent 60%);
+    transition:background .1s linear;
+  }
+  .hero .wrap{z-index:1;}
+  .eyebrow-script{
+    font-family:'Alex Brush', cursive;
+    font-size:clamp(30px,4vw,44px);
+    color:var(--coral);
+    margin-bottom:-6px;
+    display:block;
+    opacity:0; transform:translateY(14px);
+    animation:rise .7s ease forwards .05s;
+  }
+  .hero h1{
+    font-size:clamp(52px,9vw,108px);
+    opacity:0; transform:translateY(18px);
+    animation:rise .7s ease forwards .18s;
+  }
+  .hero h1 .l2{color:var(--lime); display:block;}
+  .hero p{
+    max-width:520px;margin:30px 0 40px;
+    color:var(--paper-dim);font-size:18px;
+    opacity:0; transform:translateY(14px);
+    animation:rise .7s ease forwards .34s;
+  }
+  .hero-ctas{
+    display:flex;flex-wrap:wrap;gap:14px;
+    opacity:0; transform:translateY(14px);
+    animation:rise .7s ease forwards .48s;
+  }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
+
+  .pill{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 26px;border-radius:100px;
+    font-weight:700;font-size:14px;
+    text-transform:uppercase;letter-spacing:0.02em;
+    cursor:pointer;border:1px solid transparent;
+    text-decoration:none;
+    transition:transform .15s ease, box-shadow .2s ease;
+  }
+  .pill:hover{transform:translateY(-2px);}
+  .pill.primary{background:var(--coral);color:var(--ink);box-shadow:0 10px 26px -8px rgba(240,137,126,0.55);}
+  .pill.primary:hover{box-shadow:0 14px 30px -6px rgba(240,137,126,0.6);}
+  .pill.secondary{background:rgba(244,241,234,0.04);color:var(--paper);border-color:var(--line);box-shadow:inset 0 0 0 1px rgba(244,241,234,0.02);}
+  .pill.secondary:hover{border-color:var(--paper-dim);}
+  .pill.tertiary{background:var(--tan);color:var(--ink);box-shadow:0 10px 26px -8px rgba(216,185,140,0.55);}
+  .pill.tertiary:hover{box-shadow:0 14px 30px -6px rgba(216,185,140,0.6);}
+  .pill .plus{font-size:18px;line-height:1;transition:transform .25s ease;}
+  .pill.open .plus{transform:rotate(45deg);}
+
+  /* MARQUEE */
+  .marquee-band{
+    background:var(--lime); color:var(--ink);
+    transform:skewY(-1.6deg);
+    margin:24px 0 40px;
+    overflow:hidden;
+    border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
+  }
+  .marquee-track{
+    display:flex; white-space:nowrap;
+    animation:scroll-left 22s linear infinite;
+    transform:skewY(1.6deg);
+  }
+  .marquee-track span{
+    font-family:'Anton'; font-size:22px; text-transform:uppercase;
+    padding:14px 34px; letter-spacing:0.01em;
+    display:inline-flex; align-items:center; gap:16px;
+  }
+  .marquee-track span::after{content:"✦"; font-size:14px;}
+  @keyframes scroll-left{
+    from{transform:skewY(1.6deg) translateX(0);}
+    to{transform:skewY(1.6deg) translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+    .hero *{animation:none !important; opacity:1 !important; transform:none !important;}
+  }
+
+  /* SERVICES */
+  .services{padding:50px 0 70px;}
+  .services .head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:40px; flex-wrap:wrap;}
+  .services h2{font-size:clamp(30px,4.2vw,44px);max-width:640px;}
+  .services .head .script{font-size:clamp(26px,3vw,34px); color:var(--lime);}
+  .service-list{display:grid;gap:0;}
+  .service-item{
+    display:grid;grid-template-columns:56px 1fr auto;align-items:baseline;
+    gap:20px;padding:26px 22px;border-top:1px solid var(--line);
+    border-radius:14px;
+    transition:padding-left .25s ease, background .25s ease, box-shadow .25s ease;
+  }
+  .service-item:hover{
+    padding-left:32px;
+    background:linear-gradient(120deg, rgba(199,230,46,0.05), rgba(240,137,126,0.03));
+    box-shadow:0 14px 34px -18px rgba(0,0,0,0.7);
+  }
+  .service-item:last-child{border-bottom:1px solid var(--line);}
+  .service-item .idx{font-family:'Anton'; color:var(--paper-dim); font-size:15px;}
+  .service-item .name{font-family:'Anton'; text-transform:uppercase; font-size:26px;letter-spacing:0.01em;}
+  .service-item .desc{color:var(--paper-dim);font-size:14px;grid-column:2 / -1;max-width:560px;margin-top:-6px;font-family:'Poppins';}
+
+  /* PORTFOLIO — carrusel rotatorio, panel diferenciado */
+  .portfolio{
+    position:relative;
+    padding:90px 0 100px;
+    margin:20px 0;
+    background:
+      radial-gradient(700px 400px at 85% 0%, rgba(199,230,46,0.10), transparent 60%),
+      linear-gradient(180deg, #121210, var(--ink-2));
+    clip-path:polygon(0 4%, 100% 0%, 100% 96%, 0% 100%);
+    overflow:hidden;
+  }
+  .portfolio .head{margin-bottom:36px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .portfolio .eyebrow{font-family:'Alex Brush';color:var(--lime);font-size:clamp(24px,3vw,32px);display:block;margin-bottom:-4px;}
+  .portfolio h2{font-size:clamp(30px,4.2vw,44px);}
+  .portfolio .sub{color:var(--paper-dim);margin-top:12px;max-width:520px;}
+  .carousel-nav{display:flex;gap:10px;}
+  .carousel-arrow{
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--line);background:transparent;color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:18px;transition:border-color .2s ease, transform .15s ease;
+  }
+  .carousel-arrow:hover{border-color:var(--lime);transform:translateY(-1px);}
+
+  .carousel{
+    position:relative;
+    height:460px;
+    perspective:1400px;
+    display:flex;align-items:center;justify-content:center;
+    touch-action:pan-y;
+    cursor:grab;
+    margin:0 -28px;
+  }
+  .carousel:active{cursor:grabbing;}
+  .carousel-track{
+    position:relative;width:100%;height:100%;
+    transform-style:preserve-3d;
+  }
+  .card{
+    position:absolute;top:50%;left:50%;
+    width:230px;height:410px;
+    border-radius:16px;
+    background:linear-gradient(155deg, var(--ink-2), #1c1c18);
+    border:1px solid var(--line);
+    box-shadow:0 30px 50px -20px rgba(0,0,0,0.85);
+    overflow:hidden;
+    transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease, border-color .3s ease, filter .4s ease, box-shadow .4s ease;
+    user-select:none;
+  }
+  .ig-wrap{width:328px;transform:scale(0.701);transform-origin:top left;}
+  .card-video{width:100%;height:100%;object-fit:cover;display:block;background:#000;}
+  .drag-catch{position:absolute;inset:0;z-index:5;cursor:grab;background:transparent;}
+  .card.is-active .drag-catch{pointer-events:none;}
+  .card.is-active{border-color:rgba(199,230,46,0.5);box-shadow:0 34px 60px -18px rgba(199,230,46,0.25), 0 20px 40px -20px rgba(0,0,0,0.9);}
+  .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:26px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--line);border:none;cursor:pointer;transition:background .2s ease, transform .2s ease;padding:0;}
+  .dot.is-active{background:var(--lime);transform:scale(1.3);}
+  @media (max-width:680px){
+    .carousel{height:340px;}
+    .card{width:170px;height:300px;}
+    .ig-wrap{transform:scale(0.518);}
+  }
+
+  /* WORK WITH ME SECTION */
+  .work{padding:80px 0 100px;border-top:1px solid var(--line);}
+  .work h2{font-size:clamp(30px,4.2vw,44px);margin-bottom:12px;}
+  .work .sub{color:var(--paper-dim);max-width:520px;margin-bottom:40px;font-family:'Poppins';}
+
+  .accordion{border-top:1px solid var(--line);}
+  .acc-item{border-bottom:1px solid var(--line);border-radius:14px;transition:background .25s ease, box-shadow .25s ease;}
+  .acc-item.open{background:linear-gradient(120deg, rgba(199,230,46,0.045), rgba(240,137,126,0.02));box-shadow:0 20px 44px -26px rgba(0,0,0,0.8);}
+  .acc-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:28px 20px;cursor:pointer;
+  }
+  .acc-head h3{font-size:24px;}
+  .acc-head .plus{font-size:22px;color:var(--paper-dim);transition:transform .25s ease;}
+  .acc-item.open .acc-head .plus{transform:rotate(45deg);color:var(--lime);}
+  .acc-body{
+    max-height:0;overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .acc-item.open .acc-body{max-height:760px;}
+  .acc-inner{padding:0 20px 32px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:560px){.field-row{grid-template-columns:1fr;}}
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:13px;color:var(--paper-dim);margin-bottom:8px;font-family:'Poppins';}
+  .field label .req{color:var(--coral);}
+  .field label .opt{color:#6b6960;font-weight:400;}
+  .field input, .field textarea{
+    width:100%;background:rgba(244,241,234,0.03);border:1px solid transparent;border-bottom:1px solid var(--line);
+    border-radius:10px 10px 0 0;
+    color:var(--paper);font-family:'Poppins';font-size:16px;padding:12px 12px;
+    outline:none;resize:vertical;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:#6b6960;}
+  .field input:focus, .field textarea:focus{border-bottom-color:var(--lime);background:rgba(199,230,46,0.05);}
+  .submit-btn{
+    margin-top:8px;display:inline-flex;align-items:center;gap:10px;
+    background:var(--lime);color:var(--ink);border:none;
+    padding:15px 30px;border-radius:100px;font-weight:700;font-size:14px;
+    text-transform:uppercase;letter-spacing:0.02em;
+    box-shadow:0 14px 30px -10px rgba(199,230,46,0.4);
+    cursor:pointer;font-family:'Poppins';transition:transform .15s ease, box-shadow .2s ease;
+  }
+  .submit-btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -8px rgba(199,230,46,0.5);}
+  .hint{font-size:12px;color:var(--paper-dim);margin-top:14px;font-family:'Poppins';}
+
+  /* TRUSTED BY / CLIENTES Y MARCAS — panel diferenciado */
+  .trusted{
+    position:relative;
+    padding:90px 0 100px;
+    margin:20px 0 40px;
+    background:
+      radial-gradient(700px 400px at 10% 100%, rgba(240,137,126,0.10), transparent 60%),
+      linear-gradient(180deg, var(--ink-2), #121210);
+    clip-path:polygon(0 0%, 100% 4%, 100% 100%, 0% 96%);
+  }
+  .trusted .eyebrow{font-family:'Alex Brush';color:var(--coral);font-size:clamp(24px,3vw,32px);display:block;margin-bottom:-4px;}
+  .trusted h2{font-size:clamp(26px,3.6vw,36px);margin-bottom:32px;}
+  .logo-row{display:flex;flex-wrap:wrap;gap:14px;}
+  .logo-chip{
+    flex:1 1 150px;min-height:90px;
+    border:1px solid var(--line);border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--paper-dim);font-size:14px;font-weight:600;
+    background:linear-gradient(155deg, var(--ink-2), #1a1a17);
+    box-shadow:0 14px 30px -20px rgba(0,0,0,0.8);
+    text-align:center;padding:12px;
+    transition:border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .logo-chip:hover{border-color:var(--lime); color:var(--paper); transform:translateY(-3px); box-shadow:0 18px 36px -16px rgba(199,230,46,0.25);}
+
+  /* TARIFAS */
+  .pricing{padding:70px 0 90px;text-align:center;}
+  .pricing .eyebrow-tarifas{font-size:clamp(24px,3vw,32px);color:var(--tan);display:block;margin-bottom:-6px;}
+  .pricing h2{font-size:clamp(32px,5vw,54px);margin-bottom:18px;}
+  .pricing p{max-width:480px;margin:0 auto 30px;color:var(--paper-dim);font-size:16px;}
+  .pricing .pill{margin:0 auto;}
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--line);padding:44px 0;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
+    box-shadow:0 -20px 40px -30px rgba(0,0,0,0.6) inset;
+  }
+  footer .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;}
+  .foot-script{font-family:'Alex Brush'; font-size:28px; color:var(--tan);}
+  .socials{display:flex;gap:22px;font-size:13px;color:var(--paper-dim);text-transform:uppercase;letter-spacing:0.03em;}
+  .socials a{text-decoration:none;}
+  .socials a:hover{color:var(--paper);}
+  .copy{font-size:12px;color:#6b6960;}
+
+  /* FLOATING WHATSAPP */
+  .wa-float{
+    position:fixed;bottom:22px;right:22px;z-index:60;
+    width:58px;height:58px;border-radius:50%;
+    background:var(--lime);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    text-decoration:none;color:var(--ink);
+    animation:pulse 2.6s ease-in-out infinite;
+  }
+  .wa-float svg{width:26px;height:26px;}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 8px 24px rgba(0,0,0,0.4), 0 0 0 0 rgba(199,230,46,0.5);}
+    50%{box-shadow:0 8px 24px rgba(0,0,0,0.4), 0 0 0 10px rgba(199,230,46,0);}
+  }
+
+  @media (max-width:640px){
+    .hero{padding:44px 0 30px;}
+    .service-item{grid-template-columns:1fr;}
+    .service-item .desc{grid-column:1;}
+    .services{padding:22px 0 16px;}
+    .services .head{margin-bottom:20px;}
+    .portfolio{padding:16px 0 20px;}
+    .work{padding:20px 0 50px;}
+    .work .sub{margin-bottom:24px;}
+    .trusted{padding:30px 0 44px;}
+    .marquee-band{margin:14px 0 16px;}
+    .pricing{padding:44px 0 60px;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Volver arriba"><span class="b1">SOY</span><span class="b2">BRAIN</span><span class="b3">MONKEY</span></a>
+    <a class="nav-cta" id="nav-wa" href="#" target="_blank" rel="noopener">Escríbeme</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="glow" id="glow"></div>
+  <div class="wrap">
+    <span class="eyebrow-script script">tu marca,</span>
+    <h1>contenido<span class="l2">que vende</span></h1>
+    <p>Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje. Contenido personalizado, adaptado a tu punto de partida.</p>
+    <div class="hero-ctas">
+      <div class="pill primary" data-target="acc-cliente"><span>Quiero trabajar contigo</span><span class="plus">+</span></div>
+      <div class="pill secondary" data-target="acc-equipo"><span>Quiero sumarme al equipo</span><span class="plus">+</span></div>
+      <div class="pill tertiary" data-target="acc-capcut"><span>Clases de CapCut</span><span class="plus">+</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-band">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
+<section class="services">
+  <div class="wrap">
+    <div class="head">
+      <h2>Tienes algo que contar.<br>Yo lo convierto en contenido.</h2>
+    </div>
+    <div class="service-list">
+      <div class="service-item">
+        <div class="idx">01</div>
+        <div class="name">Publicas más</div>
+        <div class="desc">Convierte tus ideas, productos o servicios en contenido listo para publicar sin que la creación sea un bloqueo.</div>
+      </div>
+      <div class="service-item">
+        <div class="idx">02</div>
+        <div class="name">Ahorras horas</div>
+        <div class="desc">Me encargo de estructurar, grabar y editar para que tú puedas centrarte en lo que realmente importa.</div>
+      </div>
+      <div class="service-item">
+        <div class="idx">03</div>
+        <div class="name">Retienes la atención</div>
+        <div class="desc">Ritmo, cortes, textos y recursos pensados para que tu contenido enganche desde el primer segundo.</div>
+      </div>
+      <div class="service-item">
+        <div class="idx">04</div>
+        <div class="name">Te ves profesional</div>
+        <div class="desc">Una imagen y edición coherentes con tu marca para que cada vídeo transmita confianza y profesionalidad.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="eyebrow">mira cómo queda</span>
+        <h2>Trabajos realizados</h2>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="prevBtn" aria-label="Anterior">‹</button>
+        <button class="carousel-arrow" id="nextBtn" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel" id="carousel">
+    <div class="carousel-track" id="carousel-track"></div>
+  </div>
+  <div class="carousel-dots" id="carousel-dots"></div>
+</section>
+
+<section class="work" id="trabaja-conmigo">
+  <div class="wrap">
+    <h2>Empecemos</h2>
+    <p class="sub">Elige la opción que mejor te encaje y rellena el formulario.</p>
+
+    <div class="accordion">
+      <div class="acc-item" id="acc-cliente">
+        <div class="acc-head" data-toggle="acc-cliente">
+          <h3>Quiero trabajar contigo</h3>
+          <span class="plus">+</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <form id="form-cliente">
+              <div class="field">
+                <label>Nombre <span class="req">*</span></label>
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label>Correo <span class="req">*</span></label>
+                  <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="field">
+                  <label>Teléfono <span class="opt">(opcional)</span></label>
+                  <input type="tel" name="telefono" placeholder="600 000 000">
+                </div>
+              </div>
+              <div class="field">
+                <label>Marca o empresa</label>
+                <input type="text" name="empresa" placeholder="Nombre de tu marca">
+              </div>
+              <div class="field">
+                <label>Instagram</label>
+                <input type="text" name="instagram" placeholder="@usuario">
+              </div>
+              <div class="field">
+                <label>Cuéntame tu proyecto <span class="req">*</span></label>
+                <textarea name="proyecto" rows="3" placeholder="Qué necesitas y para cuándo" required></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
+              <p class="hint">Se abre WhatsApp con un mensaje ya redactado — solo tienes que darle a enviar.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc-equipo">
+        <div class="acc-head" data-toggle="acc-equipo">
+          <h3>Quiero sumarme al equipo</h3>
+          <span class="plus">+</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <form id="form-equipo">
+              <div class="field">
+                <label>Nombre <span class="req">*</span></label>
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label>Correo <span class="req">*</span></label>
+                  <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="field">
+                  <label>Teléfono <span class="opt">(opcional)</span></label>
+                  <input type="tel" name="telefono" placeholder="600 000 000">
+                </div>
+              </div>
+              <div class="field">
+                <label>¿En qué te especializas? <span class="req">*</span></label>
+                <input type="text" name="especialidad" placeholder="Edición, guion, cámara, community..." required>
+              </div>
+              <div class="field">
+                <label>Portfolio o Instagram</label>
+                <input type="text" name="portfolio" placeholder="Enlace o @usuario">
+              </div>
+              <div class="field">
+                <label>Cuéntame por qué quieres sumarte</label>
+                <textarea name="mensaje" rows="3" placeholder="Un par de líneas sobre ti"></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
+              <p class="hint">Se abre WhatsApp con un mensaje ya redactado — solo tienes que darle a enviar.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc-capcut">
+        <div class="acc-head" data-toggle="acc-capcut">
+          <h3>Necesito clases de edición en CapCut</h3>
+          <span class="plus">+</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <form id="form-capcut">
+              <div class="field">
+                <label>Nombre <span class="req">*</span></label>
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label>Correo <span class="req">*</span></label>
+                  <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="field">
+                  <label>Teléfono <span class="opt">(opcional)</span></label>
+                  <input type="tel" name="telefono" placeholder="600 000 000">
+                </div>
+              </div>
+              <div class="field">
+                <label>¿Cuál es tu nivel actual?</label>
+                <input type="text" name="nivel" placeholder="Principiante, algo de experiencia, avanzado...">
+              </div>
+              <div class="field">
+                <label>¿Qué te gustaría aprender?</label>
+                <textarea name="mensaje" rows="3" placeholder="Transiciones, ritmo, subtítulos, efectos..."></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
+              <p class="hint">Se abre WhatsApp con un mensaje ya redactado — solo tienes que darle a enviar.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trusted">
+  <div class="wrap">
+    <span class="eyebrow">han confiado en mí</span>
+    <h2>Clientes y marcas con las que he trabajado</h2>
+    <div class="logo-row" id="trusted-grid">
+      <!-- Sustituye cada chip por el logo real de la marca (imagen) -->
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="wrap">
+    <span class="script eyebrow-tarifas">¿cuánto cuesta?</span>
+    <h2>Tarifas</h2>
+    <p>Cada vídeo es un trabajo personalizado, así que la tarifa será acorde al trabajo a realizar.</p>
+    <a class="pill primary" id="pricing-wa" href="#" target="_blank" rel="noopener">Hablemos</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-script script">gracias por pasarte</div>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="copy">© 2026 SOYBRAINMONKEY</div>
+  </div>
+</footer>
+
+<a class="wa-float" id="float-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.28-1.39c1.44.79 3.06 1.2 4.72 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.84-3.05-.2-.32a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.22 8.26-8.22zm-4.5 4.71c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.7 2.68 4.19 3.66 2.07.82 2.49.65 2.94.61.45-.04 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.42h-.47z"/></svg>
+</a>
+
+<script>
+  const WA_NUMBER = "34679762842";
+
+  document.getElementById('nav-wa').href = `https://wa.me/${WA_NUMBER}`;
+  document.getElementById('float-wa').href = `https://wa.me/${WA_NUMBER}`;
+  document.getElementById('pricing-wa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola! Quiero consultarte sobre tarifas para un vídeo.')}`;
+
+  // Hero glow follows the cursor
+  const hero = document.getElementById('hero');
+  const glow = document.getElementById('glow');
+  hero.addEventListener('mousemove', (e)=>{
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    glow.style.setProperty('--mx', x + '%');
+    glow.style.setProperty('--my', y + '%');
+  });
+
+  // Marquee content
+  const words = ["Edición de vídeo", "Marca personal", "Guiones para reels", "Estructura y grabación"];
+  const marqueeTrack = document.getElementById('marquee-track');
+  for(let i=0;i<2;i++){
+    words.forEach(w=>{
+      const s = document.createElement('span');
+      s.textContent = w;
+      marqueeTrack.appendChild(s);
+    });
+  }
+
+  // Portfolio — carrusel rotatorio (coverflow) con reels reales de Instagram
+  // y opción de vídeos propios subidos a mano.
+  //
+  // Para añadir un reel de Instagram:
+  //   { type: 'ig', url: 'https://www.instagram.com/reel/XXXXXXXXX/' }
+  //
+  // Para subir un vídeo propio (sin pasar por Instagram):
+  //   1. Coloca el archivo .mp4 en una carpeta "videos" junto a este HTML
+  //      (por ejemplo: videos/trabajo1.mp4).
+  //   2. Añade una línea así en la lista de abajo:
+  //      { type: 'video', src: 'videos/trabajo1.mp4' }
+  //   El vídeo se reproducirá directamente dentro de la tarjeta, con controles.
+  const items = [
+    { type: 'ig', url: 'https://www.instagram.com/reel/DTvlLIaCGzL/' },
+    { type: 'ig', url: 'https://www.instagram.com/reel/DRb1YzLCND_/' },
+    { type: 'ig', url: 'https://www.instagram.com/reel/DUN51gWCFga/' },
+    { type: 'ig', url: 'https://www.instagram.com/p/DR0lVwgCIdD/' },
+    { type: 'ig', url: 'https://www.instagram.com/reel/DdG--sPsADr/' },
+    { type: 'ig', url: 'https://www.instagram.com/reel/DTVGJOiCApx/' },
+  ];
+
+  const track = document.getElementById('carousel-track');
+  const dotsWrap = document.getElementById('carousel-dots');
+  const cards = [];
+  let current = 0;
+
+  items.forEach((it, i)=>{
+    const d = document.createElement('div');
+    d.className = 'card';
+    if(it.type === 'video'){
+      d.innerHTML = `<video class="card-video" src="${it.src}" controls playsinline preload="metadata"></video><div class="drag-catch"></div>`;
+    } else {
+      d.innerHTML = `<div class="ig-wrap"><blockquote class="instagram-media" data-instgrm-permalink="${it.url}" data-instgrm-version="14" style="margin:0;"></blockquote></div><div class="drag-catch"></div>`;
+    }
+    track.appendChild(d);
+    cards.push(d);
+
+    const dot = document.createElement('button');
+    dot.className = 'dot';
+    dot.addEventListener('click', ()=>{ goTo(i); });
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function layout(){
+    const n = cards.length;
+    cards.forEach((card, i)=>{
+      let offset = i - current;
+      if(offset > n/2) offset -= n;
+      if(offset < -n/2) offset += n;
+
+      const abs = Math.abs(offset);
+      const x = offset * 160;
+      const rotY = offset * -28;
+      const z = -abs * 140;
+      const scale = abs === 0 ? 1 : 0.78;
+      const opacity = abs > 2 ? 0 : (abs === 0 ? 1 : 0.55);
+
+      card.style.transform = `translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.zIndex = 100 - abs;
+      card.style.filter = abs === 0 ? 'none' : 'brightness(0.6)';
+      card.classList.toggle('is-active', abs === 0);
+
+      // Pausa cualquier vídeo propio que no esté en la tarjeta activa
+      if(abs !== 0){
+        const vid = card.querySelector('.card-video');
+        if(vid && !vid.paused) vid.pause();
+      }
+    });
+    dots.forEach((dot, i)=> dot.classList.toggle('is-active', i === current));
+  }
+
+  function goTo(i){
+    current = (i + cards.length) % cards.length;
+    layout();
+  }
+  function next(){ goTo(current + 1); }
+  function prev(){ goTo(current - 1); }
+
+  document.getElementById('nextBtn').addEventListener('click', next);
+  document.getElementById('prevBtn').addEventListener('click', prev);
+  cards.forEach((card, i)=> card.addEventListener('click', (e)=>{
+    if(e.target.closest('video') || e.target.closest('iframe')) return;
+    goTo(i);
+  }));
+
+  // Drag / swipe support — el carrusel es estático, solo cambia si el usuario arrastra
+  const carouselEl = document.getElementById('carousel');
+  let dragStartX = 0, dragging = false;
+  carouselEl.addEventListener('pointerdown', (e)=>{ dragging = true; dragStartX = e.clientX; });
+  window.addEventListener('pointerup', (e)=>{
+    if(!dragging) return;
+    dragging = false;
+    const dx = e.clientX - dragStartX;
+    if(dx > 40) { prev(); }
+    else if(dx < -40) { next(); }
+  });
+
+  layout();
+
+  // Procesa los embeds oficiales de Instagram en cuanto su script cargue
+  (function processIgEmbeds(){
+    if(window.instgrm && window.instgrm.Embeds){ window.instgrm.Embeds.process(); }
+    else { setTimeout(processIgEmbeds, 300); }
+  })();
+
+  // Clientes y marcas — placeholders, sustituir por logos reales
+  const brands = ["Marca 1", "Marca 2", "Marca 3", "Marca 4", "Marca 5", "Marca 6"];
+  const trustedGrid = document.getElementById('trusted-grid');
+  brands.forEach(b=>{
+    const d = document.createElement('div');
+    d.className = 'logo-chip';
+    d.textContent = b;
+    trustedGrid.appendChild(d);
+  });
+
+  // Hero pills open the matching accordion item and scroll to it
+  document.querySelectorAll('.pill[data-target]').forEach(p=>{
+    p.addEventListener('click', ()=>{
+      const id = p.getAttribute('data-target');
+      openAcc(id);
+      document.getElementById(id).scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+  function openAcc(id){
+    document.querySelectorAll('.acc-item').forEach(el=>{
+      if(el.id === id){ el.classList.add('open'); }
+    });
+  }
+
+  document.querySelectorAll('.acc-head').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const id = head.getAttribute('data-toggle');
+      const item = document.getElementById(id);
+      item.classList.toggle('open');
+    });
+  });
+
+  // Forms -> build WhatsApp message
+  function contactLines(f){
+    const email = f.get('email');
+    const tel = f.get('telefono');
+    let lines = '';
+    if(email) lines += `Correo: ${email}\n`;
+    if(tel) lines += `Teléfono: ${tel}\n`;
+    return lines;
+  }
+
+  document.getElementById('form-cliente').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = new FormData(this);
+    const msg = `Hola! Soy ${f.get('nombre')}${f.get('empresa') ? ' de ' + f.get('empresa') : ''}. Quiero trabajar contigo.\n` +
+                contactLines(f) +
+                `Instagram: ${f.get('instagram') || '-'}\n` +
+                `Proyecto: ${f.get('proyecto')}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  document.getElementById('form-equipo').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = new FormData(this);
+    const msg = `Hola! Soy ${f.get('nombre')}, me quiero sumar al equipo de SOYBRAINMONKEY.\n` +
+                contactLines(f) +
+                `Especialidad: ${f.get('especialidad')}\n` +
+                `Portfolio/IG: ${f.get('portfolio') || '-'}\n` +
+                `Mensaje: ${f.get('mensaje') || '-'}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  document.getElementById('form-capcut').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = new FormData(this);
+    const msg = `Hola! Soy ${f.get('nombre')}, quiero clases de edición en CapCut.\n` +
+                contactLines(f) +
+                `Nivel: ${f.get('nivel') || '-'}\n` +
+                `Quiero aprender: ${f.get('mensaje') || '-'}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+</script>
+
+</body>
+</html>
