@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOYBRAINMONKEY — Edición de vídeo y marca personal</title>
-<meta name="description" content="Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje. Contenido personalizado, adaptado a tu punto de partida.">
+<title>SOYBRAINMONKEY — Editor de vídeo y creador de contenido | Branding y marketing digital</title>
+<meta name="description" content="Editor de vídeo y content manager especializado en reels, creación de contenido y branding. Guiones, grabación, edición y marca personal para creadores y marcas que quieren vender con vídeo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.soybrainmonkey.com/">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="SOYBRAINMONKEY — Elite Creative Studio">
-<meta property="og:description" content="Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje.">
+<meta property="og:title" content="SOYBRAINMONKEY — Editor de vídeo y creador de contenido">
+<meta property="og:description" content="Edición de vídeo, reels, branding y marca personal. Content manager y estrategia de marketing digital para creadores y marcas.">
 <meta property="og:image" content="og-image.png">
 <meta property="og:url" content="https://www.soybrainmonkey.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SOYBRAINMONKEY — Elite Creative Studio">
-<meta name="twitter:description" content="Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje.">
+<meta name="twitter:title" content="SOYBRAINMONKEY — Editor de vídeo y creador de contenido">
+<meta name="twitter:description" content="Edición de vídeo, reels, branding y marca personal. Content manager y estrategia de marketing digital para creadores y marcas.">
 <meta name="twitter:image" content="og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -296,6 +298,16 @@
   .field{margin-bottom:20px;}
   .field label{display:block;font-size:13px;color:var(--paper-dim);margin-bottom:8px;font-family:'Poppins';}
   .field label .req{color:var(--coral);}
+  .consent-field{display:flex;align-items:flex-start;}
+  .consent-label{
+    display:flex !important;align-items:flex-start;gap:10px;
+    font-size:13px !important;color:var(--paper-dim);cursor:pointer;
+    margin-bottom:0 !important;text-transform:none;
+  }
+  .consent-label input[type="checkbox"]{
+    width:16px;height:16px;flex:none;margin-top:2px;accent-color:var(--lime);cursor:pointer;
+  }
+  .consent-label a{color:var(--lime);text-decoration:underline;}
   .field label .opt{color:#6b6960;font-weight:400;}
   .field input, .field textarea{
     width:100%;background:rgba(244,241,234,0.03);border:1px solid transparent;border-bottom:1px solid var(--line);
@@ -360,7 +372,14 @@
     text-align:center;
   }
   footer .wrap{display:flex;flex-direction:column;align-items:center;gap:28px;}
+  .foot-brand-row{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;}
   .foot-brand{display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .resources-link{
+    font-family:'Poppins';font-weight:600;font-size:13px;color:var(--lime);
+    text-decoration:none;border:1px solid var(--lime);border-radius:100px;
+    padding:10px 18px;transition:background .2s ease, color .2s ease;
+  }
+  .resources-link:hover{background:var(--lime);color:var(--ink);}
   .foot-logo{font-family:'Anton';font-size:clamp(26px,4vw,36px);letter-spacing:0.02em;text-transform:uppercase;}
   .foot-logo .b1{color:var(--paper);}
   .foot-logo .b2{color:var(--coral);}
@@ -379,6 +398,7 @@
   @media (max-width:640px){
     .foot-bottom{grid-template-columns:1fr;justify-items:center;text-align:center;gap:16px;}
     .foot-script, .socials, .copy{justify-self:center;}
+    .foot-brand-row{flex-direction:column;}
   }
 
   /* FLOATING WHATSAPP */
@@ -415,6 +435,35 @@
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="17" fill="none" stroke="%23c7e62e" stroke-width="2"/></svg>') 20 20, pointer;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "SOYBRAINMONKEY",
+  "alternateName": "SOYBRAINMONKEY — Elite Creative Studio",
+  "description": "Editor de vídeo y content manager especializado en reels, creación de contenido, branding y marca personal para creadores y marcas.",
+  "url": "https://www.soybrainmonkey.com/",
+  "image": "https://www.soybrainmonkey.com/og-image.png",
+  "logo": "https://www.soybrainmonkey.com/favicon.png",
+  "sameAs": [
+    "https://www.instagram.com/soybrainmonkey/",
+    "https://www.tiktok.com/@soybrainmonkey",
+    "https://www.youtube.com/@SoyBrainMonkey"
+  ],
+  "areaServed": "ES",
+  "knowsAbout": [
+    "Edición de vídeo",
+    "Creación de contenido",
+    "Content manager",
+    "Reels",
+    "Branding",
+    "Marca personal",
+    "Marketing digital",
+    "Guionización",
+    "Grabación de vídeo"
+  ]
+}
+</script>
 </head>
 <body id="top">
 
@@ -429,8 +478,8 @@
 <section class="hero" id="hero">
   <div class="glow" id="glow"></div>
   <div class="wrap">
-    <span class="eyebrow-script script">tu marca,</span>
-    <h1>contenido<span class="l2">que vende</span></h1>
+    <span class="eyebrow-script script">tienes la idea,</span>
+    <h1>yo tengo<span class="l2">el gancho</span></h1>
     <p>Edición de vídeo y creación de marca personal: guiones para reels, estructura, grabación y montaje. Contenido personalizado, adaptado a tu punto de partida.</p>
     <div class="hero-ctas">
       <div class="pill primary" data-target="acc-cliente"><span>Quiero trabajar contigo</span><span class="plus">+</span></div>
@@ -533,6 +582,9 @@
                 <label>Cuéntame tu proyecto <span class="req">*</span></label>
                 <textarea name="proyecto" rows="3" placeholder="Qué necesitas y para cuándo" required></textarea>
               </div>
+              <div class="field consent-field">
+                <label class="consent-label"><input type="checkbox" name="consentimiento" required> He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a> <span class="req">*</span></label>
+              </div>
               <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
               <p class="hint">Solo tienes que darle a enviar.</p>
             </form>
@@ -574,6 +626,9 @@
                 <label>Cuéntame por qué quieres sumarte</label>
                 <textarea name="mensaje" rows="3" placeholder="Un par de líneas sobre ti"></textarea>
               </div>
+              <div class="field consent-field">
+                <label class="consent-label"><input type="checkbox" name="consentimiento" required> He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a> <span class="req">*</span></label>
+              </div>
               <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
               <p class="hint">Solo tienes que darle a enviar.</p>
             </form>
@@ -610,6 +665,9 @@
               <div class="field">
                 <label>¿Qué te gustaría aprender?</label>
                 <textarea name="mensaje" rows="3" placeholder="Transiciones, ritmo, subtítulos, efectos..."></textarea>
+              </div>
+              <div class="field consent-field">
+                <label class="consent-label"><input type="checkbox" name="consentimiento" required> He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a> <span class="req">*</span></label>
               </div>
               <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
               <p class="hint">Solo tienes que darle a enviar.</p>
@@ -651,9 +709,13 @@
 
 <footer>
   <div class="wrap">
-    <div class="foot-brand">
-      <div class="foot-logo"><span class="b1">SOY</span><span class="b2">BRAIN</span><span class="b3">MONKEY</span></div>
-      <div class="foot-tagline">Elite Creative Studio</div>
+    <div class="foot-brand-row">
+      <a href="merch.html" class="resources-link">← Merchandising</a>
+      <div class="foot-brand">
+        <div class="foot-logo"><span class="b1">SOY</span><span class="b2">BRAIN</span><span class="b3">MONKEY</span></div>
+        <div class="foot-tagline">Elite Creative Studio</div>
+      </div>
+      <a href="recursos.html" class="resources-link">Recursos gratis →</a>
     </div>
     <div class="foot-bottom">
       <span class="foot-script script">gracias por pasarte</span>
@@ -662,7 +724,7 @@
         <a href="https://www.tiktok.com/@soybrainmonkey" target="_blank" rel="noopener">TikTok</a>
         <a href="https://www.youtube.com/@SoyBrainMonkey" target="_blank" rel="noopener">YouTube</a>
       </div>
-      <span class="copy">© 2026 SOYBRAINMONKEY</span>
+      <span class="copy">© 2026 SOYBRAINMONKEY · <a href="privacidad.html" style="color:inherit;text-decoration:underline;">Privacidad</a></span>
     </div>
   </div>
 </footer>
@@ -812,12 +874,12 @@
   //   { name: 'Nombre de la marca', img: 'logos/marca1.png' }
   // Si no pones "img", se muestra el nombre en texto (como ahora).
   const brands = [
-    { name: "Marca 1" },
-    { name: "Marca 2" },
-    { name: "Marca 3" },
-    { name: "Marca 4" },
-    { name: "Marca 5" },
-    { name: "Marca 6" },
+    { name: "El Platero de Oro" },
+    { name: "Ramarcar" },
+    { name: "Marketing Digital" },
+    { name: "Pazo do Souto" },
+    { name: "Digitmike" },
+    { name: "FlyMonkey GG" },
   ];
   const trustedGrid = document.getElementById('trusted-grid');
   brands.forEach(b=>{

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merchandising — SOYBRAINMONKEY | Editor de vídeo y marca personal</title>
+<meta name="description" content="Camisetas y merchandising de SOYBRAINMONKEY, estudio creativo de edición de vídeo, creación de contenido, reels y branding.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.soybrainmonkey.com/merch.html">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Alex+Brush&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0b0a; --ink-2:#151512; --paper:#f4f1ea; --paper-dim:#a9a69c;
+    --lime:#c7e62e; --coral:#f0897e; --tan:#d8b98c; --line: rgba(244,241,234,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(199,230,46,0.06), transparent 60%),
+      radial-gradient(1000px 700px at 110% 30%, rgba(240,137,126,0.05), transparent 55%),
+      var(--ink);
+    color:var(--paper); font-family:'Poppins',sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Anton', sans-serif; font-weight:400; line-height:0.95; margin:0; text-transform:uppercase;}
+  .script{font-family:'Alex Brush', cursive; text-transform:none; display:inline-block;}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,10,0.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav .inner{max-width:1120px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .logo{font-family:'Anton';font-size:19px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;}
+  .logo .b1{color:var(--paper);} .logo .b2{color:var(--coral);} .logo .b3{color:var(--lime);}
+  .back-link{font-size:13px;color:var(--paper-dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.03em;}
+  .back-link:hover{color:var(--paper);}
+
+  .hero{padding:70px 0 20px;text-align:center;}
+  .eyebrow{font-family:'Alex Brush';color:var(--tan);font-size:clamp(28px,4vw,38px);display:block;margin-bottom:-4px;}
+  .hero h1{font-size:clamp(38px,7vw,64px);}
+  .hero p{max-width:480px;margin:22px auto 0;color:var(--paper-dim);font-size:16px;}
+
+  /* MERCH — carrusel rotatorio (mismo patrón que el de trabajos) */
+  .merch{padding:50px 0 70px;}
+  .merch .head{margin-bottom:36px;display:flex;align-items:flex-end;justify-content:center;gap:20px;flex-wrap:wrap;text-align:center;}
+  .carousel-nav{display:flex;gap:10px;}
+  .carousel-arrow{
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--line);background:transparent;color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:18px;transition:border-color .2s ease, transform .15s ease;
+  }
+  .carousel-arrow:hover{border-color:var(--lime);transform:translateY(-1px);}
+
+  .carousel{
+    position:relative;height:460px;perspective:1400px;
+    display:flex;align-items:center;justify-content:center;
+    touch-action:pan-y;cursor:grab;margin:0 -28px;
+  }
+  .carousel:active{cursor:grabbing;}
+  .carousel-track{position:relative;width:100%;height:100%;transform-style:preserve-3d;}
+  .card{
+    position:absolute;top:50%;left:50%;
+    width:230px;height:410px;border-radius:16px;
+    background:linear-gradient(155deg, var(--ink-2), #1c1c18);
+    border:1px solid var(--line);
+    box-shadow:0 30px 50px -20px rgba(0,0,0,0.85);
+    overflow:hidden;
+    transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease, border-color .3s ease, filter .4s ease, box-shadow .4s ease;
+    user-select:none;
+  }
+  .drag-catch{position:absolute;inset:0;z-index:5;cursor:grab;background:transparent;}
+  .card.is-active .drag-catch{pointer-events:none;}
+  .card.is-active{border-color:rgba(199,230,46,0.5);box-shadow:0 34px 60px -18px rgba(199,230,46,0.25), 0 20px 40px -20px rgba(0,0,0,0.9);}
+  .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:26px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--line);border:none;cursor:pointer;transition:background .2s ease, transform .2s ease;padding:0;}
+  .dot.is-active{background:var(--lime);transform:scale(1.3);}
+
+  .merch-card{
+    width:100%;height:100%;position:relative;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(155deg, #1c1c18, var(--ink-2));
+  }
+  .merch-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .merch-card .info{
+    position:relative;z-index:1;padding:16px;
+    background:linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
+  }
+  .merch-card .m-name{font-family:'Poppins';font-weight:700;font-size:14px;color:var(--paper);}
+  .merch-card .m-price{font-family:'Poppins';font-weight:600;font-size:13px;color:var(--lime);margin-top:2px;}
+  .merch-card.placeholder .info{background:none;position:static;text-align:center;padding:0;}
+  .merch-card.placeholder{align-items:center;justify-content:center;}
+  .merch-card.placeholder .m-name{font-size:15px;}
+
+  @media (max-width:680px){
+    .carousel{height:340px;}
+    .card{width:170px;height:300px;}
+  }
+
+  .pill{
+    display:inline-flex;align-items:center;gap:14px;padding:17px 30px;border-radius:14px;
+    font-family:'Poppins';font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.02em;
+    cursor:pointer;border:1px solid var(--tan);color:var(--ink);background:var(--tan);
+    position:relative;overflow:hidden;isolation:isolate;text-decoration:none;
+    transition:color .3s ease, transform .15s ease;
+  }
+  .pill span{position:relative;z-index:1;}
+  .pill::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.22,.61,.36,1);}
+  .pill:hover::before{transform:scaleX(1);}
+  .pill:hover{color:var(--tan);transform:translateY(-1px);}
+
+  .cta{padding:10px 0 70px;text-align:center;}
+  .cta p{color:var(--paper-dim);margin-bottom:24px;}
+
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--paper-dim);font-size:12px;}
+
+  .wa-float{
+    position:fixed;bottom:22px;right:22px;z-index:60;width:58px;height:58px;border-radius:50%;
+    background:var(--lime);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);text-decoration:none;color:var(--ink);
+  }
+  .wa-float svg{width:26px;height:26px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a class="logo" href="index.html"><span class="b1">SOY</span><span class="b2">BRAIN</span><span class="b3">MONKEY</span></a>
+    <a class="back-link" href="index.html">← Volver a la web</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow script">lleva la marca contigo</span>
+    <h1>Merchandising</h1>
+    <p>Camisetas y más, diseñadas por mí. Arrastra o usa las flechas para verlas todas.</p>
+  </div>
+</section>
+
+<section class="merch">
+  <div class="wrap">
+    <div class="head">
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="merchPrevBtn" aria-label="Anterior">‹</button>
+        <button class="carousel-arrow" id="merchNextBtn" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel" id="merchCarousel">
+    <div class="carousel-track" id="merchTrack"></div>
+  </div>
+  <div class="carousel-dots" id="merchDots"></div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <p>¿Te interesa alguna? Pregúntame tallas y disponibilidad.</p>
+    <a class="pill" id="merch-wa" href="#" target="_blank" rel="noopener"><span>Escríbeme por WhatsApp</span></a>
+  </div>
+</section>
+
+<footer>© 2026 SOYBRAINMONKEY · <a href="privacidad.html" style="color:inherit;text-decoration:underline;">Privacidad</a></footer>
+
+<a class="wa-float" id="float-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.28-1.39c1.44.79 3.06 1.2 4.72 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.84-3.05-.2-.32a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.22 8.26-8.22zm-4.5 4.71c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.7 2.68 4.19 3.66 2.07.82 2.49.65 2.94.61.45-.04 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.42h-.47z"/></svg>
+</a>
+
+<script>
+  const WA_NUMBER = "34679762842";
+  document.getElementById('float-wa').href = `https://wa.me/${WA_NUMBER}`;
+  document.getElementById('merch-wa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola! Me interesa una de tus camisetas.')}`;
+
+  // Merch — carrusel rotatorio, con tus camisetas/productos.
+  // Para añadir una real:
+  //   { name: 'Nombre de la camiseta', price: '20€', img: 'merch/camiseta1.jpg' }
+  // Sin "img" se muestra como placeholder de "próximamente".
+  const merchItems = [
+    { name: "Camiseta 1", price: "Próximamente" },
+    { name: "Camiseta 2", price: "Próximamente" },
+    { name: "Camiseta 3", price: "Próximamente" },
+    { name: "Camiseta 4", price: "Próximamente" },
+    { name: "Camiseta 5", price: "Próximamente" },
+  ];
+
+  const merchTrack = document.getElementById('merchTrack');
+  const merchDotsWrap = document.getElementById('merchDots');
+  const merchCards = [];
+  let merchCurrent = 0;
+
+  merchItems.forEach((it, i)=>{
+    const d = document.createElement('div');
+    d.className = 'card';
+    if(it.img){
+      d.innerHTML = `<div class="merch-card"><img src="${it.img}" alt="${it.name}"><div class="info"><div class="m-name">${it.name}</div><div class="m-price">${it.price}</div></div></div><div class="drag-catch"></div>`;
+    } else {
+      d.innerHTML = `<div class="merch-card placeholder"><div class="info"><div class="m-name">${it.name}</div><div class="m-price">${it.price}</div></div></div><div class="drag-catch"></div>`;
+    }
+    merchTrack.appendChild(d);
+    merchCards.push(d);
+
+    const dot = document.createElement('button');
+    dot.className = 'dot';
+    dot.addEventListener('click', ()=>{ merchGoTo(i); });
+    merchDotsWrap.appendChild(dot);
+  });
+  const merchDots = Array.from(merchDotsWrap.children);
+
+  function merchLayout(){
+    const n = merchCards.length;
+    merchCards.forEach((card, i)=>{
+      let offset = i - merchCurrent;
+      if(offset > n/2) offset -= n;
+      if(offset < -n/2) offset += n;
+
+      const abs = Math.abs(offset);
+      const x = offset * 160;
+      const rotY = offset * -28;
+      const z = -abs * 140;
+      const scale = abs === 0 ? 1 : 0.78;
+      const opacity = abs > 2 ? 0 : (abs === 0 ? 1 : 0.55);
+
+      card.style.transform = `translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.zIndex = 100 - abs;
+      card.style.filter = abs === 0 ? 'none' : 'brightness(0.6)';
+      card.classList.toggle('is-active', abs === 0);
+    });
+    merchDots.forEach((dot, i)=> dot.classList.toggle('is-active', i === merchCurrent));
+  }
+
+  function merchGoTo(i){
+    merchCurrent = (i + merchCards.length) % merchCards.length;
+    merchLayout();
+  }
+  function merchNext(){ merchGoTo(merchCurrent + 1); }
+  function merchPrev(){ merchGoTo(merchCurrent - 1); }
+
+  document.getElementById('merchNextBtn').addEventListener('click', merchNext);
+  document.getElementById('merchPrevBtn').addEventListener('click', merchPrev);
+  merchCards.forEach((card, i)=> card.addEventListener('click', ()=> merchGoTo(i)));
+
+  const merchCarouselEl = document.getElementById('merchCarousel');
+  let merchDragStartX = 0, merchDragging = false;
+  merchCarouselEl.addEventListener('pointerdown', (e)=>{ merchDragging = true; merchDragStartX = e.clientX; });
+  window.addEventListener('pointerup', (e)=>{
+    if(!merchDragging) return;
+    merchDragging = false;
+    const dx = e.clientX - merchDragStartX;
+    if(dx > 40) { merchPrev(); }
+    else if(dx < -40) { merchNext(); }
+  });
+
+  merchLayout();
+</script>
+
+</body>
+</html>
